@@ -45,7 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 				.usernameParameter("Login").passwordParameter("Password").permitAll().and().logout()
 				.logoutSuccessUrl("/").invalidateHttpSession(true).deleteCookies("JSESSIONID")
 				// .logoutUrl("/logout")
-				.permitAll().and().rememberMe();
+				.permitAll().and().rememberMe().and().csrf().disable();
 	}
 
 	@Override

@@ -5,7 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
+import AngularProjectDemo.user.domain.User;
+import AngularProjectDemo.user.service.UserService;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalTime;
@@ -20,7 +21,9 @@ public class InitializeDB
 {
 
     private static final Logger log = LoggerFactory.getLogger(InitializeDB.class);
-
+    
+    @Autowired
+    private UserService userService;
    
 
     @PostConstruct
@@ -31,6 +34,8 @@ public class InitializeDB
 
 	DateTimeFormatter germanFormatter = ofLocalizedTime(FormatStyle.MEDIUM).withLocale(Locale.GERMAN);
 	String s = LocalTime.now().minusMinutes(10).format(germanFormatter);
+	
+	userService.create(new User("Peter","Zwegat","Email"));
 
     }
 }
