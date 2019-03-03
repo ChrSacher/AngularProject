@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import BackendSpring.security.domain.CurrentUser;
 import BackendSpring.security.domain.User;
 
-@Service
+@Service(value = "userService")
 public class CurrentUserDetailsService implements UserDetailsService
 {
 	 private static final Logger log = LoggerFactory.getLogger(CurrentUserDetailsService.class);
@@ -20,6 +20,7 @@ public class CurrentUserDetailsService implements UserDetailsService
 	@Autowired
 	public CurrentUserDetailsService(UserService userService)
 	{
+	    	log.debug("test");
 		this.userService = userService;
 	}
 
@@ -28,7 +29,7 @@ public class CurrentUserDetailsService implements UserDetailsService
 	{
 		log.debug("Authenticating user with email={}", email.replaceFirst("@.*", "@***"));
 		User user = userService.getUserByEmail(email)
-				.orElseThrow(() -> new UsernameNotFoundException("User with email= " + email + " cannot be not found"));
+				.orElseThrow(() -> {log.debug("No User found") ;return new UsernameNotFoundException("User with email= " + email + " cannot be not found");});
 		return new CurrentUser(user);
 	}
 }

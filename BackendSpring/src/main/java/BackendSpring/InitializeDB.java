@@ -45,8 +45,9 @@ public class InitializeDB
 	x.setPasswordRepeated("test");
 	x.setUserName("Zwegat");
 	x.setRole(Role.ADMIN);
-	userService.create(x);
+	
 	try {
+	    userService.create(x);
 	    devService.createDeveloper(x);
 	} catch (UserAllreadyExistsException e) {
 	    // TODO Auto-generated catch block
