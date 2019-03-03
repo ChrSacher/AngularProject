@@ -12,33 +12,34 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import BackendSpring.developer.domain.Developer;
 import BackendSpring.developer.service.DeveloperService;
-
+import BackendSpring.developer.service.UserDeveloperNotFoundException;
 import BackendSpring.security.domain.CurrentUser;
 import BackendSpring.security.domain.CurrentUserDTO;
 
 @ControllerAdvice
-public class CurrentUserControllerAdvice
-{
+public class CurrentUserControllerAdvice {
     @Autowired
     private DeveloperService developerService;
-    
+
     private static final Logger LOGGER = LoggerFactory.getLogger(CurrentUserControllerAdvice.class);
 
     @ModelAttribute("CurrentUserInfo")
-    public CurrentUserDTO getCurrentUser(Authentication authentication) throws UsernameNotFoundException
-    {
+    public CurrentUserDTO getCurrentUser(Authentication authentication) throws UsernameNotFoundException {
 	CurrentUser user = (authentication == null) ? null : (CurrentUser) authentication.getPrincipal();
-	if (user != null)
-	{
-	    Optional<Developer> cus = developerService.getCurrentCustomer();
-	    if (cus.isPresent())
-	    {
-		return new  CurrentUserDTO(cus.get(),user.getEmail(),true);
+	if (user != null) {
+	    Optional<Developer> cus;
+	    try {
+		cus = developerService.getCurrentDeveloper();
+		if (cus.isPresent()) {
+		    return new CurrentUserDTO(cus.get(), user.getEmail(), true);
+		}
+	    } catch (UserDeveloperNotFoundException e) {
+		LOGGER.info(e.getMessage());
 	    }
 
 	}
-	return new  CurrentUserDTO(null,"",false);
-	
+	return new CurrentUserDTO(null, "", false);
+
     }
 
 }
