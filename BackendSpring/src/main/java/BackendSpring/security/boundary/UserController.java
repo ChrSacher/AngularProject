@@ -41,7 +41,7 @@ public class UserController
 	private DeveloperService developerService;
 	private UserCreateFormValidator userCreateFormValidator;
 
-	/*@Autowired
+	@Autowired
 	public UserController(UserService userService, UserCreateFormValidator userCreateFormValidator,DeveloperService developerService)
 	{
 		this.userService = userService;
@@ -54,7 +54,7 @@ public class UserController
 	{
 		binder.addValidators(userCreateFormValidator);
 	}
-
+/*
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping("/users")
 	public String getUsersPage(Model model)

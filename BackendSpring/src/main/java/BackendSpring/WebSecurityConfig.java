@@ -39,13 +39,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 
 		// http.csrf().disable();
 		http.authorizeRequests()
-				.antMatchers("/api","/api/*","/*")
+				.antMatchers("/developer/*","/api","/api/*","*")
 				.permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login")
 				.loginProcessingUrl("/logUserIn").defaultSuccessUrl("/", false).failureUrl("/login?error")
 				.usernameParameter("Login").passwordParameter("Password").permitAll().and().logout()
 				.logoutSuccessUrl("/").invalidateHttpSession(true).deleteCookies("JSESSIONID")
 				// .logoutUrl("/logout")
 				.permitAll().and().rememberMe().and().csrf().disable();
+		
 	}
 
 	@Override

@@ -5,7 +5,7 @@ import javax.validation.constraints.NotEmpty;
 public class UserCreateForm {
 
     @NotEmpty
-    private String nickname = "";
+    private String userName = "";
 
     @NotEmpty
     private String email = "";
@@ -20,12 +20,12 @@ public class UserCreateForm {
     private Role role = Role.USER;
 
 
-    public String getNickname() {
-        return nickname;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
     public String getEmail() {
         return email;
@@ -66,7 +66,7 @@ public class UserCreateForm {
                 ", password=***" + '\'' +
                 ", passwordRepeated=***" + '\'' +
                 ", role=" + role +
-                ", nickname=" + nickname +
+                ", nickname=" + userName +
                 '}';
 
     }
