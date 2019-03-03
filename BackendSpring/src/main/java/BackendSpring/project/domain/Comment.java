@@ -1,14 +1,21 @@
-package BackendSpring.ticket.domain;
+package BackendSpring.project.domain;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 import BackendSpring.BaseEntity;
 import BackendSpring.developer.domain.Developer;
-
+@Entity
 public class Comment extends BaseEntity<Long>{
    
     private String content;
+    @ManyToOne
     private Developer commentator;
+    @OneToMany
     private List<Comment> subComments;
     
     /**

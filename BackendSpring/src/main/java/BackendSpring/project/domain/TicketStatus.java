@@ -1,4 +1,4 @@
-package BackendSpring.ticket.domain;
+package BackendSpring.project.domain;
 
 public enum TicketStatus {
     Open,

@@ -1,4 +1,4 @@
-package BackendSpring.ticket.boundary;
+package BackendSpring.project.boundary;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;

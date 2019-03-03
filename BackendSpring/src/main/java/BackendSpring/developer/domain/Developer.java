@@ -1,7 +1,10 @@
 package BackendSpring.developer.domain;
 
+import javax.persistence.Entity;
+
 import BackendSpring.BaseEntity;
 
+@Entity
 public class Developer extends BaseEntity<Long> 
 {
     private String firstName;
@@ -10,6 +13,9 @@ public class Developer extends BaseEntity<Long>
     private String email;
     private String profilePicture;
     
+    public Developer() {
+	
+    }
     /**
      * @param firstName
      * @param lastName

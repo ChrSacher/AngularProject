@@ -5,8 +5,8 @@ import java.util.Optional;
 
 import BackendSpring.project.domain.Project;
 import BackendSpring.project.domain.ProjectMember;
-import BackendSpring.task.domain.Task;
-import BackendSpring.ticket.domain.Ticket;
+import BackendSpring.project.domain.Task;
+import BackendSpring.project.domain.Ticket;
 
 public interface ProjectService {
 

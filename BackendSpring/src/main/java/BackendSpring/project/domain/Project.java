@@ -3,14 +3,15 @@ package BackendSpring.project.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import BackendSpring.BaseEntity;
 import BackendSpring.developer.domain.Developer;
-import BackendSpring.task.domain.Task;
-import BackendSpring.ticket.domain.Ticket;
 
+@Entity
 public class Project extends BaseEntity<Long> {
 
     private String name;
@@ -19,10 +20,10 @@ public class Project extends BaseEntity<Long> {
     @ManyToMany
     private List<ProjectMember> members = new ArrayList();
     
-    @ManyToOne
+    @OneToMany
     private List<Task> tasks = new ArrayList();
    
-    @ManyToOne
+    @OneToMany
     private List<Ticket> tickets = new ArrayList();;
     
     public void addProjectMember(ProjectMember member)
