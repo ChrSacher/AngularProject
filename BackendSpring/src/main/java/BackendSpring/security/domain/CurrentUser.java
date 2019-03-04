@@ -30,7 +30,7 @@ public class CurrentUser extends org.springframework.security.core.userdetails.U
     }
 
     public String getNickname() {
-        return user.getNickname();}
+        return user.getUserName();}
     
     public String getEmail() {
         return user.getEmail();}
@@ -39,7 +39,7 @@ public class CurrentUser extends org.springframework.security.core.userdetails.U
     public String toString() {
         return "CurrentUser{" +
                 "user=" + user +
-                "getNickname=" + user.getNickname() +
+                "getNickname=" + user.getUserName() +
                 "} " + super.toString();
     }
 }
