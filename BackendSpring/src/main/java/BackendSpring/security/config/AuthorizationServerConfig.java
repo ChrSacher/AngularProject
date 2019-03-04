@@ -1,4 +1,4 @@
-package BackendSpring.security.boundary;
+package BackendSpring.security.config;
 
 import java.util.Arrays;
 
@@ -34,6 +34,8 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+
+import BackendSpring.security.jwt.CustomTokenEnhancer;
 
 @Configuration
 @EnableAuthorizationServer

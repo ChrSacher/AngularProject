@@ -1,4 +1,4 @@
-package BackendSpring.security.boundary;
+package BackendSpring.security.config;
 
 
 import org.springframework.core.Ordered;

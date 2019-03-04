@@ -1,4 +1,4 @@
-package BackendSpring.security.boundary;
+package BackendSpring.security.config;
 
 import java.util.Map;
 
@@ -15,6 +15,8 @@ import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHand
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+
+import BackendSpring.security.jwt.CustomAccessTokenConverter;
 
 @Configuration
 @EnableResourceServer
