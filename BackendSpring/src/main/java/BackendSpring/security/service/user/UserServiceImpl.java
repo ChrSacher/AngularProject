@@ -17,7 +17,6 @@ import BackendSpring.security.domain.CurrentUser;
 import BackendSpring.security.domain.User;
 import BackendSpring.security.domain.UserCreateForm;
 import BackendSpring.security.domain.UserRepository;
-import BackendSpring.security.service.dto.UserDTO;
 
 
 
@@ -33,19 +32,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO getUserById(long id) {
+    public  User getUserById(long id) {
         log.debug("Getting user={}", id);
         User user = userRepository.findById(id).orElseThrow(() -> 
 		new NoSuchElementException(String.format(">>> User=%s not found", id)));
-        UserDTO userDTO = new UserDTO();
-        BeanUtils.copyProperties(user, userDTO);
-        return userDTO;
+        return user;
     }
     
     @Override
-    public Optional<User> getUserByEmail(String email) {
+    public User getUserByEmail(String email) {
         log.debug("Getting user by email={}", email.replaceFirst("@.*", "@***"));
-        return userRepository.findOneByEmail(email);
+        return userRepository.findOneByEmail(email).orElseThrow(() -> 
+	new NoSuchElementException(String.format(">>> User=%s not found", email)));
     }
 
     @Override
@@ -59,16 +57,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDTO> getAllUsers() {
+    public List<User> getAllUsers() {
         log.debug("Getting all users");
         List<User> targetListOrigin = userRepository.findAllByOrderByNicknameAsc(); 
-		List<UserDTO> targetList= new ArrayList<>(); 
-		for (User source: targetListOrigin ) {
-		  	 UserDTO target= new UserDTO();
-		     BeanUtils.copyProperties(source , target);
-		     targetList.add(target);
-		}
-        return targetList;
+        return targetListOrigin;
     }
 
     @Override
@@ -80,10 +72,16 @@ public class UserServiceImpl implements UserService {
         user.setRole(form.getRole());
         return userRepository.save(user);
     }
-    
-    public Optional<CurrentUser> getCurrentUser() 
+    @Override
+    public User loadUserByUsername(String userName)
     {
-	 return Optional.ofNullable((CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+	return userRepository.findOneByUserName(userName).orElseThrow(() -> 
+	new NoSuchElementException(String.format(">>> User=%s not found", userName)));
+    }
+
+    @Override
+    public boolean verifyCredentials(String password, String passwordHash) {
+	return new BCryptPasswordEncoder().matches(password, passwordHash);
     }
 
 }

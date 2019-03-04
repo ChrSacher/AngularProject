@@ -11,8 +11,8 @@ import BackendSpring.BaseEntity;
 @Table(name = "secuser")
 public class User extends BaseEntity<Long> {
 
-    @Column(name = "nickname", nullable = false, unique = true)
-    private String nickname;
+    @Column(name = "userName", nullable = false, unique = true)
+    private String userName;
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
@@ -27,12 +27,12 @@ public class User extends BaseEntity<Long> {
         return super.getId();
     }
     
-    public String getNickname() {
-        return nickname;
+    public String getUserName() {
+        return userName;
     }
 
     public void setNickname(String nickname) {
-        this.nickname = nickname;
+        this.userName = nickname;
     }
 
     public String getEmail() {
@@ -64,7 +64,7 @@ public class User extends BaseEntity<Long> {
     public String toString() {
         return "User{" +
                 "id=" + getId() +
-                "nicknameo=" + nickname +
+                "nicknameo=" + userName +
                 ", email='" + email.replaceFirst("@.*", "@***") +
                 ", passwordHash='" + passwordHash.substring(0, 10) +
                 ", role=" + role +
