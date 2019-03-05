@@ -2,6 +2,7 @@ package BackendSpring.security.jwt;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import BackendSpring.security.domain.Role;
 import BackendSpring.security.domain.User;
@@ -9,7 +10,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-
+@Component
 public class JwtTokenParser {
 
     @Autowired

@@ -47,8 +47,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean existsByNickname(String nickname) {
-        return userRepository.existsByNickname(nickname);
+    public boolean existsByUserName(String nickname) {
+        return userRepository.existsByUserName(nickname);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAllUsers() {
         log.debug("Getting all users");
-        List<User> targetListOrigin = userRepository.findAllByOrderByNicknameAsc(); 
+        List<User> targetListOrigin = userRepository.findAllByOrderByUserNameAsc(); 
         return targetListOrigin;
     }
 

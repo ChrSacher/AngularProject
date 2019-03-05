@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -33,6 +34,7 @@ import BackendSpring.developer.service.DeveloperService;
 import BackendSpring.developer.service.UserAllreadyExistsException;
 import BackendSpring.security.domain.User;
 import BackendSpring.security.domain.UserCreateForm;
+import BackendSpring.security.jwt.AuthenticatedUser;
 import BackendSpring.security.jwt.JwtToken;
 import BackendSpring.security.jwt.JwtTokenGenerator;
 import BackendSpring.security.jwt.JwtTokenRequest;
@@ -61,12 +63,18 @@ public class UserController {
     public void initBinder(WebDataBinder binder) {
 	binder.addValidators(userCreateFormValidator);
     }
-
+    @RequestMapping(value = "/api/secure/test", method = RequestMethod.POST)
+    public AuthenticatedUser testFunction(Authentication auth) 
+    {
+	return (AuthenticatedUser)auth;
+	
+    }
+    
     @RequestMapping(value = "/api/login", method = RequestMethod.POST)
-    public JwtToken jsonLogin(@RequestBody JwtTokenRequest credentials) {
-
+    public JwtToken jsonLogin(@RequestParam String username,@RequestParam String password,@RequestParam String grant_type) {
+	JwtTokenRequest credentials = new JwtTokenRequest(username,password);
 	JwtToken response = new JwtToken();
-
+	
 	User userDetails = userService.loadUserByUsername(credentials.getUsername());
 
 	if (userDetails == null) {

@@ -1,10 +1,22 @@
 package BackendSpring.security.jwt;
 
-public class JwtTokenRequest {
+import java.io.Serializable;
+
+public class JwtTokenRequest implements Serializable {
     
     private String username;
 
     private String password;
+
+    /**
+     * @param username
+     * @param password
+     */
+    public JwtTokenRequest(String username, String password) {
+	super();
+	this.username = username;
+	this.password = password;
+    }
 
     public String getUsername() {
 	return username;

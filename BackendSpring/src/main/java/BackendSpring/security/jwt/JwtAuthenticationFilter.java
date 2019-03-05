@@ -8,14 +8,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
+import org.springframework.security.web.util.matcher.RequestMatcher;
+import org.springframework.stereotype.Component;
 
+@Component
 public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
+    
+    @Autowired
+    public JwtAuthenticationFilter(AuthenticationManager authManager) {
+	super("/api/secure/**");
+	setAuthenticationManager(authManager);
 
-    public JwtAuthenticationFilter() {
-	super("/**");
+    }
+
+    public JwtAuthenticationFilter(AuthenticationManager authManager, RequestMatcher matcher) {
+	super(matcher);
+	setAuthenticationManager(authManager);
+
     }
 
     @Autowired
@@ -23,7 +37,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
 
     @Override
     protected boolean requiresAuthentication(HttpServletRequest request, HttpServletResponse response) {
-	return true;
+        return super.requiresAuthentication(request, response);
     }
 
     @Override

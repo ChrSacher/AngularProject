@@ -43,7 +43,7 @@ public class UserCreateFormValidator implements Validator {
     }
 
     private void validateEmail(Errors errors, UserCreateForm form) {
-        if (userService.existsByNickname(form.getUserName())) {
+        if (userService.existsByUserName(form.getUserName())) {
             errors.reject("nickname", "nutzer mit diesem nickname existiert bereits !!!");
         }
         else
